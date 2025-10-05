@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import (
 	"bytes"
-	"github.com/whalerapi/templ-go/models"
+	"github.com/whalelogic/templ-go/models"
 	"github.com/yuin/goldmark"
 	"log"
 )

@@ -8,7 +8,7 @@ package templates
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/whalerapi/templ-go/models"
+import "github.com/whalelogic/templ-go/models"
 import "strings"
 
 func getIconForCategory(category string) string {
