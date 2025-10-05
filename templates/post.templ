@@ -1,0 +1,44 @@
+package templates
+
+import (
+  "bytes"
+  "log"
+  "github.com/whalelogic/templ-go/models"
+  "github.com/yuin/goldmark"
+)
+
+templ PostPage(post models.Post) {
+	@Layout(post.Title) {
+		
+		<article class="max-w-4xl mx-auto px-4">
+		<a href="/all_posts_page" class="text-gray-900 hover:text-indigo-800 font-semibold p-2">👈 Back</a>
+			<header class="mb-8">
+				<h1 class="text-4xl font-bold text-slate-900 m-4">{ post.Title }</h1>
+				if post.Subtitle != "" {
+					<p class="text-xl text-slate-600 mb-4">{ post.Subtitle }</p>
+				}
+				<div class="flex items-center text-sm text-slate-500 space-x-4">
+					<span>By { post.Author }</span>
+					<span>•</span>
+					<span>{ post.ReadTime }</span>
+					if post.Category != "" {
+						<span>•</span>
+						<span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs font-medium">{ post.Category }</span>
+					}
+				</div>
+			</header>
+			<div class="prose">
+			    @templ.Raw(convertMarkdownToHTML(post.Content))
+			</div>
+		</article>
+	}
+}
+
+func convertMarkdownToHTML(content string) string {
+	var buf bytes.Buffer
+	if err := goldmark.Convert([]byte(content), &buf); err != nil {
+		log.Printf("error converting markdown: %v", err)
+		return content // Return original content if conversion fails
+	}
+	return buf.String()
+}
