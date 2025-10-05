@@ -1,8 +1,8 @@
-# Go-Templ-Fiber-Tailwind 🌠 🦫
+# 🗺️ Terra-In-Cloudnito 🧭🏜️🏝️
 
-#### A modern blog application built with a powerful Go stack, designed for speed and simplicity. This project serves blog posts written in Markdown from a local JSON file, providing a fast, server-rendered experience with a clean, responsive design.
+#### 🍃 A modern blog application built with a powerful Go stack, designed for speed and simplicity. This project serves blog posts written in Markdown from a local JSON file, providing a fast, server-rendered experience with a clean, responsive design.
 
-## Features 🌟
+## Features 🧜🏼‍♀️
 
   - Markdown-Powered: Blog posts are written in simple Markdown and stored in a allposts.json file.
 
