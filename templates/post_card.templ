@@ -49,7 +49,7 @@ func getIconForCategory(category string) string {
 }
 
 templ PostCard(post models.Post) {
-	<a href={ templ.URL("/blog/" + post.Slug) } class="group bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex items-start space-x-6 hover:scale-105 hover:border-indigo-400">
+	<a href={ templ.URL("/blog/" + post.Slug) } class="post-card group bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex items-start space-x-6 hover:scale-105 hover:border-indigo-400">
 		<img src={ getIconForCategory(post.Category) } alt={ post.Category } class="h-12 w-12 flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity duration-300"/>
 		<div class="flex-grow">
 			<h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors duration-300">{ post.Title }</h3>
