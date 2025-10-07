@@ -1,6 +1,7 @@
 package templates
 
 import "github.com/whalelogic/templ-go/models"
+import "github.com/whalelogic/templ-go/components"
 
 templ ResumePage(profile models.Profile) {
 	@Layout(profile.Name + " - Resume") {
@@ -15,6 +16,9 @@ templ ResumePage(profile models.Profile) {
 					<p class="text-xl text-indigo-600 font-semibold mt-1">{ profile.Title }</p>
 					<p class="text-slate-600 mt-4">{ profile.Bio }</p>
 				</div>
+                <div class="mt-4 p-2">
+                  @components.Button("Download \n PDF File", "/resume/download", true) 
+                </div>
 			</div>
 
 			<div>

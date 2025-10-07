@@ -57,11 +57,8 @@ func main() {
 			return posts[i].CreatedOn > posts[j].CreatedOn
 		})
 
-		// Latest 4 posts.
-		latestPosts := posts
-		if len(posts) > 4 {
-			latestPosts = posts[:4]
-		}
+		// Latest 6 posts.
+		latestPosts := posts[:6]
 
 		c.Set("Content-Type", "text/html")
 		return templates.IndexPage(latestPosts).Render(c.Context(), c.Response().BodyWriter())
@@ -70,7 +67,9 @@ func main() {
 	app.Get("/about", handlers.AboutHandler)
 	app.Get("/all_posts_page", handlers.HandleAllPosts)
 	app.Get("/blog/:slug", handlers.HandlePost)
+	app.Get("/projects", handlers.ProjectsHandler)
 	app.Get("/resume", handlers.ResumeHandler(models.MyProfile))
+	app.Get("/resume/download", handlers.DownloadResume)
 
 	log.Println("Listening on :8080")
 	if err := app.Listen(":8080"); err != nil {

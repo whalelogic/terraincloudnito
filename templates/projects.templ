@@ -1,0 +1,102 @@
+package templates
+
+templ ProjectsPage() {
+	@Layout("My Projects") {
+		<div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+			<h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-8 pb-4">My GitHub Projects</h1>
+			
+			<div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<p id="loading-state" class="text-slate-600">Fetching projects...</p>
+			</div>
+		</div>
+
+		<script>
+			async function fetchAndRenderProjects() {
+				const githubUsername = "whalelogic"; 
+				const projectsContainer = document.getElementById('projects-container');
+				const loadingState = document.getElementById('loading-state');
+
+				const iconMap = {
+					"python": "/static/assets/technology-standard/python.png",
+					"go": "/static/go.svg",
+					"golang": "/static/golang.svg",
+					"javascript": "/static/javascript.svg",
+					"docker": "/static/docker.svg",
+					"kubernetes": "/static/kubernetes.svg",
+					"aws": "/static/aws.svg",
+					"rust": "/static/rust-dark.svg",
+					"c++": "/static/assets/icons/c++.svg",
+					"linux": "/static/linux.svg",
+					"fastapi": "/static/fast-api.svg",
+					"flask": "/static/flask.svg",
+					"django": "/static/assets/technology-standard/django.svg",
+					"react": "/static/assets/technology-standard/react.svg",
+					"vue": "/static/assets/technology-standard/vuejs.svg",
+					"ansible": "/static/assets/technology-standard/ansible.svg",
+					"terraform": "/static/assets/technology-standard/terraform.svg",
+					"google-cloud": "/static/google-cloud.svg",
+					"digitalocean": "/static/digitalocean.svg",
+					"nodejs": "/static/nodejs.svg",
+				};
+
+				const defaultIcon = "/static/whalelogic-3.png";
+
+				try {
+					const response = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&direction=desc`);
+					if (!response.ok) {
+						throw new Error(`GitHub API error: ${response.status}`);
+					}
+					const repos = await response.json();
+
+					loadingState.remove();
+
+					repos.forEach(repo => {
+						if (repo.fork) return;
+
+						const card = document.createElement('div');
+						card.className = "bg-white/60 backdrop-blur-lg rounded-2xl shadow-lg border border-slate-200 overflow-hidden flex flex-col group transform hover:-translate-y-2 transition-transform duration-300";
+
+						let imageUrl = defaultIcon;
+						if (repo.topics && repo.topics.length > 0) {
+							for (const topic of repo.topics) {
+								if (iconMap[topic]) {
+									imageUrl = iconMap[topic];
+									break;
+								}
+							}
+						} else if (repo.language && iconMap[repo.language.toLowerCase()]) {
+							imageUrl = iconMap[repo.language.toLowerCase()];
+						}
+
+						let pillsHTML = '';
+						if (repo.topics && repo.topics.length > 0) {
+							pillsHTML = repo.topics.map(topic => `<span class="inline-block bg-sky-100 text-sky-800 text-xs font-medium px-2.5 py-1 rounded-full">${topic}</span>`).join(' ');
+						} else if (repo.language) {
+							pillsHTML = `<span class="inline-block bg-slate-200 text-slate-800 text-xs font-medium px-2.5 py-1 rounded-full">${repo.language}</span>`;
+						}
+
+						card.innerHTML = `
+							<a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="block h-48">
+								<img src="${imageUrl}" alt="Project image for ${repo.name}" class="w-full h-full object-contain group-hover:opacity-90 transition-opacity duration-300 p-4"/>
+							</a>
+							<div class="p-6 flex-grow flex flex-col">
+								<h3 class="text-xl font-bold text-slate-900 mb-2">${repo.name}</h3>
+								<p class="text-slate-600 text-sm flex-grow mb-4">${repo.description || "No description available."}</p>
+								<div class="flex flex-wrap gap-2">
+									${pillsHTML}
+								</div>
+							</div>
+						`;
+						projectsContainer.appendChild(card);
+					});
+
+				} catch (error) {
+					loadingState.innerText = "Failed to fetch projects. Please check the username or API rate limits.";
+					console.error("Error fetching GitHub projects:", error);
+				}
+			}
+
+			document.addEventListener('DOMContentLoaded', fetchAndRenderProjects);
+		</script>
+	}
+}

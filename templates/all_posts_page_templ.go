@@ -43,7 +43,7 @@ func AllPostsPage(posts []models.Post) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"container mx-auto px-4\"><img src=\"/static/whalerapi.png\" alt=\"Blog Hero Image\" class=\"w-full h-64 object-cover rounded-lg mb-8\"><h1 class=\"text-4xl font-bold my-8\">Blog Archive</h1><p class=\"text-lg opacity-90 mb-8\">A List of All Blog Posts</p><div class=\"mb-8\"><input type=\"text\" placeholder=\"Search posts...\" class=\"border border-gray-300 rounded-lg py-2 px-4 w-full\"></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"container mx-auto px-4\"><img src=\"/static/whalelogic-3.png\" alt=\"Blog Hero Image\" class=\"w-full h-80 object-cover rounded-lg mb-8\"><h1 class=\"text-4xl font-bold my-8\">Blog Archive</h1><p class=\"text-lg opacity-90 mb-8\">A List of All Blog Posts</p><div class=\"mb-8\"><input type=\"text\" placeholder=\"Search posts...\" class=\"border border-gray-300 rounded-lg py-2 px-4 w-full\"></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

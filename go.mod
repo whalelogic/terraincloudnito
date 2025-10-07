@@ -6,6 +6,7 @@ require (
 	github.com/a-h/templ v0.3.943
 	github.com/gofiber/fiber/v2 v2.52.9
 	github.com/yuin/goldmark v1.7.13
+	terraincloudnito v0.0.0-00010101000000-000000000000
 )
 
 require (
@@ -20,3 +21,5 @@ require (
 	github.com/valyala/fasthttp v1.65.0 // indirect
 	golang.org/x/sys v0.35.0 // indirect
 )
+
+replace terraincloudnito => ./
