@@ -27,6 +27,7 @@
 - Templating: Templ
 - Styling: Tailwind CSS
 - Markdown Parser: Goldmark
+- File conversion: Python, 
 
 <br>
 
@@ -36,10 +37,14 @@
 .
 ├── handlers/         # Fiber request handlers
 ├── models/           # Go struct definitions (e.g., Post)
+├── components/       # Templ components and HTML fragments (buttons)
 ├── static/           # Static assets (CSS, images)
+├── services/         # API's for internal and database (fetch posts)
 ├── templates/        # Templ components (.templ files)
 ├── allposts.json     # Data source for blog posts
-├── go.mod            # Go module dependencies
+├── post_util.py      # Add, modify or delete posts (allposts.json)
+├── go.mod            # Go module dependencies  (github.com/gofiber/fiber/v2)
+├── go.sum            # Go check-sum validations (go.mod)
 └── main.go           # Application entry point
 ```
 
